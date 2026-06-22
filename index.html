@@ -708,7 +708,7 @@
             <span class="ia-api-warn">🤖 IA gratuita</span>
           </div>
           <textarea class="field-input field-textarea" id="rResumo" rows="5"
-            placeholder=""
+            placeholder="Escreva seu resumo aqui ou use o botão ✨ Gerar com IA acima."
             oninput="contarResumo('resumo')"></textarea>
           <div class="field-hint" id="resumoCounter"><em>Ideal: 50 a 80 palavras. Use dados reais — números tornam seu resumo memorável.</em></div>
           <div class="ia-output" id="iaOutputResumo">
@@ -1924,6 +1924,10 @@ function iaContextoGeral() {
 // ── GERAR RESUMO ──
 async function iaGerarResumo() {
   const ctx = iaContextoGeral();
+  if (!ctx.expStr && !ctx.forms && !ctx.techs) {
+    toast('Preencha ao menos uma experiência ou formação antes de usar a IA.', 'warn');
+    return;
+  }
   const prompt = `Você é um especialista em RH e redação de currículos profissionais brasileiros.
 
 Crie um RESUMO PROFISSIONAL para currículo com base nas informações abaixo.
@@ -1964,6 +1968,10 @@ function iaUsarResumo() {
 // ── GERAR OBJETIVO ──
 async function iaGerarObjetivo() {
   const ctx = iaContextoGeral();
+  if (!ctx.forms && !ctx.techs && !ctx.comps) {
+    toast('Preencha ao menos a formação ou habilidades antes de usar a IA.', 'warn');
+    return;
+  }
   const prompt = `Você é um especialista em RH e redação de currículos profissionais brasileiros.
 
 Crie um OBJETIVO PROFISSIONAL para currículo de quem está começando na carreira.
