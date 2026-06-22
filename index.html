@@ -598,10 +598,10 @@
   <!-- STEPS NAV -->
   <div class="steps-nav" id="stepsNav">
     <button class="step-btn active" onclick="irPara(0)" id="stepBtn0"><span class="step-num">1</span><span class="step-label">Cabeçalho</span></button>
-    <button class="step-btn" onclick="irPara(1)" id="stepBtn1"><span class="step-num">2</span><span class="step-label">Resumo</span></button>
-    <button class="step-btn" onclick="irPara(2)" id="stepBtn2"><span class="step-num">3</span><span class="step-label">Experiências</span></button>
-    <button class="step-btn" onclick="irPara(3)" id="stepBtn3"><span class="step-num">4</span><span class="step-label">Formação</span></button>
-    <button class="step-btn" onclick="irPara(4)" id="stepBtn4"><span class="step-num">5</span><span class="step-label">Habilidades</span></button>
+    <button class="step-btn" onclick="irPara(1)" id="stepBtn1"><span class="step-num">2</span><span class="step-label">Experiências</span></button>
+    <button class="step-btn" onclick="irPara(2)" id="stepBtn2"><span class="step-num">3</span><span class="step-label">Formação</span></button>
+    <button class="step-btn" onclick="irPara(3)" id="stepBtn3"><span class="step-num">4</span><span class="step-label">Habilidades</span></button>
+    <button class="step-btn" onclick="irPara(4)" id="stepBtn4"><span class="step-num">5</span><span class="step-label">Resumo</span></button>
     <button class="step-btn" onclick="irPara(5)" id="stepBtn5"><span class="step-num">6</span><span class="step-label">Gerar PDF</span></button>
   </div>
 
@@ -671,7 +671,7 @@
 
     <div class="step-nav-bar">
       <span></span>
-      <button class="btn-next" onclick="irPara(1)">Resumo →</button>
+      <button class="btn-next" onclick="irPara(1)">Experiências →</button>
     </div>
   </div>
 
@@ -679,6 +679,126 @@
   <!-- PASSO 2 — RESUMO PROFISSIONAL -->
   <!-- ══════════════════════════════════════════════════ -->
   <div class="step-pane" id="pane1">
+
+    <div class="form-section">
+      <div class="form-section-title">💼 Experiências profissionais</div>
+      <div class="form-section-hint">
+        <strong>💡 Regras de ouro das experiências:</strong><br/>
+        • Coloque no máximo <strong>6 experiências</strong>, priorizando as mais relevantes para a vaga.<br/>
+        • Cada bullet point deve seguir a lógica: <strong>Verbo de ação + O que fez + Resultado/Número.</strong><br/>
+        • <em>Exemplos de verbos:</em> Reduzi, Implementei, Liderei, Aumentei, Desenvolvi, Conduzi, Criei, Gerenciei, Otimizei...<br/>
+        • <em>Exemplo de bullet:</em> "Conduzi triagem de +20 mil currículos, aumentando em 20% a contratação local e reduzindo o custo por hire."<br/>
+        • Máximo <strong>5 bullets por experiência</strong>. Use números sempre que possível — eles contam sua história.
+      </div>
+
+      <div id="expsContainer"></div>
+
+      <button class="btn-add-section" onclick="adicionarExp()" id="btnAddExp">
+        ➕ Adicionar experiência
+      </button>
+    </div>
+
+    <div class="step-nav-bar">
+      <button class="btn-prev" onclick="irPara(0)">← Cabeçalho</button>
+      <button class="btn-next" onclick="irPara(2)">Formação →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- PASSO 4 — FORMAÇÃO ACADÊMICA -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="step-pane" id="pane2">
+
+    <div class="form-section">
+      <div class="form-section-title">🎓 Formação acadêmica</div>
+      <div class="form-section-hint">
+        <strong>💡 Coloque primeiro a formação mais recente ou mais relevante.</strong> Se ainda está cursando, escreva "Em andamento" no ano de conclusão.<br/>
+        <em>Para técnicos: coloque o curso técnico mesmo que não tenha graduação — é valorizado!</em>
+      </div>
+
+      <div id="formacoesContainer"></div>
+
+      <button class="btn-add-section" onclick="adicionarFormacao()">
+        ➕ Adicionar formação
+      </button>
+    </div>
+
+    <div class="form-section" style="margin-top:1.2rem;">
+      <div class="form-section-title">📜 Cursos & Certificações</div>
+      <div class="form-section-hint">
+        <strong>💡 Liste cursos relevantes para a área.</strong> Prefira os mais recentes e com carga horária. <em>Evite listar cursos de menos de 4 horas — priorizem qualidade, não quantidade.</em>
+      </div>
+
+      <div id="cursosContainer"></div>
+
+      <button class="btn-add-section" onclick="adicionarCurso()">
+        ➕ Adicionar curso / certificação
+      </button>
+    </div>
+
+    <div class="step-nav-bar">
+      <button class="btn-prev" onclick="irPara(1)">← Experiências</button>
+      <button class="btn-next" onclick="irPara(3)">Habilidades →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- PASSO 5 — HABILIDADES E IDIOMAS -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="step-pane" id="pane3">
+
+    <div class="form-section">
+      <div class="form-section-title">🛠️ Habilidades técnicas</div>
+      <div class="form-section-hint">
+        <strong>💡 Liste ferramentas, sistemas, softwares e conhecimentos técnicos.</strong><br/>
+        <em>Exemplos: Excel Avançado, Pacote Office, ATS Gupy, SAP, AutoCAD, Python, LinkedIn Recruiter, Notas Fiscais, ISO 9001...</em><br/>
+        Digite e pressione <strong>Enter</strong> ou clique em <strong>Adicionar</strong>.
+      </div>
+
+      <div class="tag-input-wrap">
+        <input type="text" class="tag-input" id="habTecInput" placeholder="Ex: Excel, Python, Photoshop..." onkeydown="if(event.key==='Enter'){event.preventDefault();addTag('tec');}"/>
+        <button class="btn-tag-add" onclick="addTag('tec')">+ Adicionar</button>
+      </div>
+      <div class="tags-list" id="habTecList"></div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">💡 Habilidades comportamentais (soft skills)</div>
+      <div class="form-section-hint">
+        <strong>💡 Escolha no máximo 6-8.</strong> Muitas soft skills genéricas perdem valor. Selecione as que realmente te definem.<br/>
+        <em>Exemplos: Liderança, Comunicação assertiva, Trabalho em equipe, Resolução de problemas, Proatividade, Inteligência emocional, Pensamento analítico...</em>
+      </div>
+
+      <div class="tag-input-wrap">
+        <input type="text" class="tag-input" id="habCompInput" placeholder="Ex: Liderança, Comunicação..." onkeydown="if(event.key==='Enter'){event.preventDefault();addTag('comp');}"/>
+        <button class="btn-tag-add" onclick="addTag('comp')">+ Adicionar</button>
+      </div>
+      <div class="tags-list" id="habCompList"></div>
+    </div>
+
+    <div class="form-section">
+      <div class="form-section-title">🌍 Idiomas</div>
+      <div class="form-section-hint">
+        <strong>💡 Seja honesto com o nível.</strong> Recrutadores testam idiomas na entrevista. Só coloque se realmente domina o nível indicado.<br/>
+        <em>Básico = entendo palavras comuns | Intermediário = me comunico com esforço | Avançado = converso com fluência | Fluente = penso no idioma</em>
+      </div>
+
+      <div id="idiomasContainer"></div>
+      <button class="btn-add-section" onclick="adicionarIdioma()">
+        ➕ Adicionar idioma
+      </button>
+    </div>
+
+    <div class="step-nav-bar">
+      <button class="btn-prev" onclick="irPara(2)">← Formação</button>
+      <button class="btn-next" onclick="irPara(4)">Resumo →</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- PASSO 6 — GERAR PDF -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="step-pane" id="pane4">
 
     <div class="form-section">
       <div class="form-section-title">📝 Resumo ou Objetivo profissional</div>
@@ -745,133 +865,13 @@
     </div>
 
     <div class="step-nav-bar">
-      <button class="btn-prev" onclick="irPara(0)">← Cabeçalho</button>
-      <button class="btn-next" onclick="irPara(2)">Experiências →</button>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- PASSO 3 — EXPERIÊNCIAS PROFISSIONAIS -->
-  <!-- ══════════════════════════════════════════════════ -->
-  <div class="step-pane" id="pane2">
-
-    <div class="form-section">
-      <div class="form-section-title">💼 Experiências profissionais</div>
-      <div class="form-section-hint">
-        <strong>💡 Regras de ouro das experiências:</strong><br/>
-        • Coloque no máximo <strong>6 experiências</strong>, priorizando as mais relevantes para a vaga.<br/>
-        • Cada bullet point deve seguir a lógica: <strong>Verbo de ação + O que fez + Resultado/Número.</strong><br/>
-        • <em>Exemplos de verbos:</em> Reduzi, Implementei, Liderei, Aumentei, Desenvolvi, Conduzi, Criei, Gerenciei, Otimizei...<br/>
-        • <em>Exemplo de bullet:</em> "Conduzi triagem de +20 mil currículos, aumentando em 20% a contratação local e reduzindo o custo por hire."<br/>
-        • Máximo <strong>5 bullets por experiência</strong>. Use números sempre que possível — eles contam sua história.
-      </div>
-
-      <div id="expsContainer"></div>
-
-      <button class="btn-add-section" onclick="adicionarExp()" id="btnAddExp">
-        ➕ Adicionar experiência
-      </button>
-    </div>
-
-    <div class="step-nav-bar">
-      <button class="btn-prev" onclick="irPara(1)">← Resumo</button>
-      <button class="btn-next" onclick="irPara(3)">Formação →</button>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- PASSO 4 — FORMAÇÃO ACADÊMICA -->
-  <!-- ══════════════════════════════════════════════════ -->
-  <div class="step-pane" id="pane3">
-
-    <div class="form-section">
-      <div class="form-section-title">🎓 Formação acadêmica</div>
-      <div class="form-section-hint">
-        <strong>💡 Coloque primeiro a formação mais recente ou mais relevante.</strong> Se ainda está cursando, escreva "Em andamento" no ano de conclusão.<br/>
-        <em>Para técnicos: coloque o curso técnico mesmo que não tenha graduação — é valorizado!</em>
-      </div>
-
-      <div id="formacoesContainer"></div>
-
-      <button class="btn-add-section" onclick="adicionarFormacao()">
-        ➕ Adicionar formação
-      </button>
-    </div>
-
-    <div class="form-section" style="margin-top:1.2rem;">
-      <div class="form-section-title">📜 Cursos & Certificações</div>
-      <div class="form-section-hint">
-        <strong>💡 Liste cursos relevantes para a área.</strong> Prefira os mais recentes e com carga horária. <em>Evite listar cursos de menos de 4 horas — priorizem qualidade, não quantidade.</em>
-      </div>
-
-      <div id="cursosContainer"></div>
-
-      <button class="btn-add-section" onclick="adicionarCurso()">
-        ➕ Adicionar curso / certificação
-      </button>
-    </div>
-
-    <div class="step-nav-bar">
-      <button class="btn-prev" onclick="irPara(2)">← Experiências</button>
-      <button class="btn-next" onclick="irPara(4)">Habilidades →</button>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- PASSO 5 — HABILIDADES E IDIOMAS -->
-  <!-- ══════════════════════════════════════════════════ -->
-  <div class="step-pane" id="pane4">
-
-    <div class="form-section">
-      <div class="form-section-title">🛠️ Habilidades técnicas</div>
-      <div class="form-section-hint">
-        <strong>💡 Liste ferramentas, sistemas, softwares e conhecimentos técnicos.</strong><br/>
-        <em>Exemplos: Excel Avançado, Pacote Office, ATS Gupy, SAP, AutoCAD, Python, LinkedIn Recruiter, Notas Fiscais, ISO 9001...</em><br/>
-        Digite e pressione <strong>Enter</strong> ou clique em <strong>Adicionar</strong>.
-      </div>
-
-      <div class="tag-input-wrap">
-        <input type="text" class="tag-input" id="habTecInput" placeholder="Ex: Excel, Python, Photoshop..." onkeydown="if(event.key==='Enter'){event.preventDefault();addTag('tec');}"/>
-        <button class="btn-tag-add" onclick="addTag('tec')">+ Adicionar</button>
-      </div>
-      <div class="tags-list" id="habTecList"></div>
-    </div>
-
-    <div class="form-section">
-      <div class="form-section-title">💡 Habilidades comportamentais (soft skills)</div>
-      <div class="form-section-hint">
-        <strong>💡 Escolha no máximo 6-8.</strong> Muitas soft skills genéricas perdem valor. Selecione as que realmente te definem.<br/>
-        <em>Exemplos: Liderança, Comunicação assertiva, Trabalho em equipe, Resolução de problemas, Proatividade, Inteligência emocional, Pensamento analítico...</em>
-      </div>
-
-      <div class="tag-input-wrap">
-        <input type="text" class="tag-input" id="habCompInput" placeholder="Ex: Liderança, Comunicação..." onkeydown="if(event.key==='Enter'){event.preventDefault();addTag('comp');}"/>
-        <button class="btn-tag-add" onclick="addTag('comp')">+ Adicionar</button>
-      </div>
-      <div class="tags-list" id="habCompList"></div>
-    </div>
-
-    <div class="form-section">
-      <div class="form-section-title">🌍 Idiomas</div>
-      <div class="form-section-hint">
-        <strong>💡 Seja honesto com o nível.</strong> Recrutadores testam idiomas na entrevista. Só coloque se realmente domina o nível indicado.<br/>
-        <em>Básico = entendo palavras comuns | Intermediário = me comunico com esforço | Avançado = converso com fluência | Fluente = penso no idioma</em>
-      </div>
-
-      <div id="idiomasContainer"></div>
-      <button class="btn-add-section" onclick="adicionarIdioma()">
-        ➕ Adicionar idioma
-      </button>
-    </div>
-
-    <div class="step-nav-bar">
-      <button class="btn-prev" onclick="irPara(3)">← Formação</button>
+      <button class="btn-prev" onclick="irPara(3)">← Habilidades</button>
       <button class="btn-next" onclick="irPara(5)">Gerar PDF →</button>
     </div>
   </div>
 
   <!-- ══════════════════════════════════════════════════ -->
-  <!-- PASSO 6 — GERAR PDF -->
+  <!-- PASSO 3 — EXPERIÊNCIAS PROFISSIONAIS -->
   <!-- ══════════════════════════════════════════════════ -->
   <div class="step-pane" id="pane5">
 
@@ -927,7 +927,7 @@
 
 
     <div class="step-nav-bar">
-      <button class="btn-prev" onclick="irPara(4)">← Habilidades</button>
+      <button class="btn-prev" onclick="irPara(4)">← Resumo</button>
       <span style="font-size:0.75rem;color:var(--muted);">Dados salvos automaticamente</span>
     </div>
   </div>
@@ -987,7 +987,7 @@
 <!-- STICKY MOBILE NAV BAR -->
 <div class="mobile-nav-bar" id="mobileNavBar">
   <button class="btn-prev" id="mobileBtnPrev" onclick="mobileNavPrev()">← Voltar</button>
-  <button class="btn-next" id="mobileBtnNext" onclick="mobileNavNext()">Resumo →</button>
+  <button class="btn-next" id="mobileBtnNext" onclick="mobileNavNext()">Experiências →</button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1092,8 +1092,8 @@ function irPara(n){
 }
 
 // Mobile bottom nav helpers
-const STEP_LABELS = ['Cabeçalho','Resumo','Experiências','Formação','Habilidades','Gerar PDF'];
-const STEP_NEXT_LABELS = ['Resumo →','Experiências →','Formação →','Habilidades →','Gerar PDF →','✅ Finalizado'];
+const STEP_LABELS = ['Cabeçalho','Experiências','Formação','Habilidades','Resumo','Gerar PDF'];
+const STEP_NEXT_LABELS = ['Experiências →','Formação →','Habilidades →','Resumo →','Gerar PDF →','✅ Finalizado'];
 
 function atualizarMobileNav(){
   var prev = document.getElementById('mobileBtnPrev');
@@ -1813,6 +1813,12 @@ function gerarEBaixarPDF(tipo) {
     });
     corpo += '</section>';
   }
+  if ((d.habTec&&d.habTec.length)||(d.habComp&&d.habComp.length)) {
+    corpo += '<section><h2>Habilidades</h2>';
+    if (d.habTec&&d.habTec.length)   corpo += '<p><b>Técnicas:</b> '+d.habTec.map(esc).join(' · ')+'</p>';
+    if (d.habComp&&d.habComp.length) corpo += '<p><b>Comportamentais:</b> '+d.habComp.map(esc).join(' · ')+'</p>';
+    corpo += '</section>';
+  }
   if (d.cursos && d.cursos.length) {
     corpo += '<section><h2>Cursos e Certificações</h2>';
     d.cursos.forEach(function(cr) {
@@ -1825,12 +1831,6 @@ function gerarEBaixarPDF(tipo) {
     corpo += '<section><h2>Idiomas</h2><p>'
            + d.idiomas.map(function(x){return '<b>'+esc(x.idioma)+'</b> ('+esc(x.nivel)+')';}).join(' &nbsp;·&nbsp; ')
            + '</p></section>';
-  }
-  if ((d.habTec&&d.habTec.length)||(d.habComp&&d.habComp.length)) {
-    corpo += '<section><h2>Habilidades</h2>';
-    if (d.habTec&&d.habTec.length)   corpo += '<p><b>Técnicas:</b> '+d.habTec.map(esc).join(' · ')+'</p>';
-    if (d.habComp&&d.habComp.length) corpo += '<p><b>Comportamentais:</b> '+d.habComp.map(esc).join(' · ')+'</p>';
-    corpo += '</section>';
   }
 
   var docHTML = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><title></title><style>'
