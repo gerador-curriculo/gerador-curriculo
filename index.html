@@ -1875,13 +1875,13 @@ function gv(id){ var el=document.getElementById(id); return el ? el.value.trim()
 // Ex: https://exittus-curriculo.bancodetalentosexittus.workers.dev
 // ══════════════════════════════════════════════════
 
-const IA_WORKER_URL = 'https://exittus-curriculo.bancodetalentosexittus.workers.dev';
+const IA_EDGE_URL = 'https://zxivdljbpdpwijtporff.supabase.co/functions/v1/gerar-curriculo';
 
 async function iaChamarWorker(prompt, btnId, labelFinal) {
   const btn = document.getElementById(btnId);
   if (btn) { btn.disabled = true; btn.innerHTML = '<span class="ia-spin">⟳</span> Gerando...'; }
   try {
-    const res = await fetch(IA_WORKER_URL, {
+    const res = await fetch(IA_EDGE_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ prompt })
