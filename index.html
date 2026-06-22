@@ -476,6 +476,7 @@
     .ia-output.show{display:block;}
     .ia-output-title{font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent);margin-bottom:0.6rem;}
     .ia-output-text{white-space:pre-wrap;color:var(--muted);}
+    .ia-output-aviso{margin-top:0.7rem;background:rgba(255,200,0,0.08);border:1px solid rgba(255,200,0,0.3);border-radius:8px;padding:0.5rem 0.8rem;font-size:0.72rem;color:#f5c400;line-height:1.5;}
     .btn-ia-usar{margin-top:0.7rem;background:rgba(0,232,255,0.15);border:1px solid rgba(0,232,255,0.35);border-radius:8px;color:var(--accent);font-family:inherit;font-size:0.75rem;font-weight:700;padding:0.4rem 0.9rem;cursor:pointer;transition:all 0.2s;}
     .btn-ia-usar:hover{background:rgba(0,232,255,0.25);}
     .ia-api-warn{font-size:0.7rem;color:var(--muted);display:flex;align-items:center;gap:0.3rem;}
@@ -834,6 +835,7 @@
           <div class="ia-output" id="iaOutputResumo">
             <div class="ia-output-title">✨ Sugestão da IA</div>
             <div class="ia-output-text" id="iaOutputResumoText"></div>
+            <div class="ia-output-aviso">⚠️ <strong>Revise antes de usar!</strong> A IA pode ter incluído números e resultados estimados. Leia com atenção, edite o que não for real e personalize com seus dados verdadeiros.</div>
             <button class="btn-ia-usar" onclick="iaUsarResumo()">↑ Usar este texto</button>
           </div>
         </div>
@@ -858,6 +860,7 @@
           <div class="ia-output" id="iaOutputObjetivo">
             <div class="ia-output-title">✨ Sugestão da IA</div>
             <div class="ia-output-text" id="iaOutputObjetivoText"></div>
+            <div class="ia-output-aviso">⚠️ <strong>Revise antes de usar!</strong> A IA pode ter incluído números e resultados estimados. Leia com atenção, edite o que não for real e personalize com seus dados verdadeiros.</div>
             <button class="btn-ia-usar" onclick="iaUsarObjetivo()">↑ Usar este texto</button>
           </div>
         </div>
@@ -1237,10 +1240,14 @@ function renderExps(){
         <div class="ia-output" id="iaOutputBullet${i}">
           <div class="ia-output-title">✨ Sugestões da IA</div>
           <div class="ia-output-text" id="iaOutputBulletText${i}"></div>
+          <div class="ia-output-aviso">⚠️ <strong>Revise antes de usar!</strong> A IA pode ter incluído números e resultados estimados. Leia com atenção, edite o que não for real e personalize com seus dados verdadeiros.</div>
           <button class="btn-ia-usar" onclick="iaUsarBullets(${i})">↑ Substituir bullets por estes</button>
         </div>
         <div id="bulletsWrap${e.id}">${renderBullets(e,i)}</div>
-        ${e.bullets.length < 5 ? `<button class="btn-add-bullet" onclick="adicionarBullet(${i})">+ Adicionar bullet point (${e.bullets.length}/5)</button>` : `<p class="bullets-counter max">✋ Máximo de 5 bullet points atingido — priorize os mais impactantes.</p>`}
+        <div style="display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;margin-top:0.2rem;">
+          ${e.bullets.length < 5 ? `<button class="btn-add-bullet" onclick="adicionarBullet(${i})">+ Adicionar bullet point (${e.bullets.length}/5)</button>` : `<p class="bullets-counter max">✋ Máximo de 5 bullet points atingido — priorize os mais impactantes.</p>`}
+          ${e.bullets.some(b=>b.trim()) ? `<button class="btn-add-bullet" style="border-color:rgba(231,76,60,0.4);color:rgba(231,76,60,0.7);" onclick="zerarBullets(${i})" title="Apagar todos os bullets">🗑 Zerar bullets</button>` : ''}
+        </div>
       </div>
     </div>`).join('');
 
@@ -1269,6 +1276,14 @@ function removerBullet(i,j){
   if(exps[i].bullets.length <= 1){ toast('Pelo menos 1 bullet por experiência.','warn'); return; }
   exps[i].bullets.splice(j,1);
   renderExps();
+}
+
+function zerarBullets(i){
+  if(!confirm('Apagar todos os bullets desta experiência?')) return;
+  exps[i].bullets = [''];
+  renderExps();
+  autosave();
+  toast('Bullets apagados.');
 }
 
 function removerExp(i){
